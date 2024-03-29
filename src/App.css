@@ -1,0 +1,25 @@
+#map {
+  height: 400px;
+  width: 600px;
+  margin: auto;
+ }
+
+ .jumbotron{
+  background-color: transparent;
+  margin: 0;
+  padding: 10px;
+ }
+
+ .jumbotron h1{
+  font-size: 2em;
+  font-weight: bold;
+ }
+
+ .jumbotron h1,
+ .jumbotron p{
+  text-align: center;
+ }
+
+ .jumbotron p{
+  font-size: 1em;
+ }
