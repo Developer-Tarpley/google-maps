@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import {useDistance} from '../context/context'
 export default function Maps() {
     let map;
     let directionsService;
     let directionsRenderer;
+    const {updateDistance} = useDistance()
 
     function initMap() {
         map = new window.google.maps.Map(document.getElementById("map"), {
@@ -33,6 +34,7 @@ export default function Maps() {
 
                 const distance = response.routes[0].legs[0].distance.text;
                 const duration = response.routes[0].legs[0].duration.text;
+                updateDistance(distance)
 
                 document.getElementById("distance").innerText = `Distance: ${distance}, Duration: ${duration}`;
             })
@@ -73,6 +75,3 @@ export default function Maps() {
         </div>
     );
 }
-
-
-
