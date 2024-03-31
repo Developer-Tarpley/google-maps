@@ -16,6 +16,8 @@ export const DistanceProvider = ({ children }) => {
   const [selectedAdditionalServices, setSelectedAdditionalServices] = useState([]);
   const [selectedLockoutService, setSelectedLockoutService] = useState(false);
   const [totalCost, setTotalCost] = useState(0);
+  const [totalQuote, setTotalQuote] = useState(0);
+  const [costPerMile, setCostPerMile] = useState(0);
 
   // Function to update the distance value
   const updateDistance = (newDistance) => {
@@ -29,7 +31,9 @@ export const DistanceProvider = ({ children }) => {
       selectedService, setSelectedService,
       selectedAdditionalServices, setSelectedAdditionalServices,
       selectedLockoutService, setSelectedLockoutService,
-      totalCost, setTotalCost
+      totalCost, setTotalCost,
+      totalQuote, setTotalQuote,
+      costPerMile, setCostPerMile
 
     }}>
       {children}
