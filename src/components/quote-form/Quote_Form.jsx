@@ -3,22 +3,67 @@ import { useDistance } from '../../context/context'
 
 export default function QuoteForm() {
     // Access distance context
-    const { distance } = useDistance();
-    const [totalCost, setTotalCost] = useState(0);
-    const [selectedService, setSelectedService] = useState(null);
-    const [selectedAdditionalServices, setSelectedAdditionalServices] = useState([]);
-    const [selectedLockoutService, setSelectedLockoutService] = useState(false);
+    const { distance, setShowQuoteModal,
+        selectedService, setSelectedService,
+        selectedAdditionalServices, setSelectedAdditionalServices,
+        selectedLockoutService, setSelectedLockoutService,
+        totalCost, setTotalCost
+    } = useDistance();
+    
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // Calculate total cost based on user inputs
         // Set the total cost state
 
+        let selSvcCount = 0;
+        let selAddSvcCount = 0;
+        let selLockSvcCount = 0;
+
         // write if staements for the individual value to be calculated.
-        console.log('distance',distance)
-        console.log('selectedService',selectedService)
-        console.log('selectedAdditionalServices',selectedAdditionalServices)
-        console.log('selectedLockoutService',selectedLockoutService)
+        // console.log('distance', distance)
+        // console.log('selectedService', selectedService)
+
+        if (selectedService === 'Basic Transport') {
+            selSvcCount = selSvcCount + 40;
+        } else if (selectedService === 'All Inclusive Transport') {
+            selSvcCount = selSvcCount + 60;
+        }
+
+        // console.log('selectedAdditionalServices', selectedAdditionalServices)
+        if (selectedAdditionalServices && selectedAdditionalServices.length > 0) {
+            if (selectedAdditionalServices.includes('Axle Check')) {
+                selAddSvcCount = selAddSvcCount + 15;
+                // console.log('selAddSvcCount',selAddSvcCount)
+            }
+            if (selectedAdditionalServices.includes('Road Side Flat')) {
+                selAddSvcCount = selAddSvcCount + 15;
+                // console.log('selAddSvcCount',selAddSvcCount)
+            }
+            if (selectedAdditionalServices.includes('Utility Service')) {
+                selAddSvcCount = selAddSvcCount + 15;
+                // console.log('selAddSvcCount',selAddSvcCount)
+            }
+        }
+
+        // console.log('selectedLockoutService', selectedLockoutService)
+        if (selectedLockoutService === true) {
+            selLockSvcCount = selLockSvcCount + 25;
+        }
+
+        console.log('selSvcCount', selSvcCount)
+        console.log('selAddSvcCount', selAddSvcCount)
+        console.log('selLockSvcCount', selLockSvcCount)
+
+        let total = (parseInt(selSvcCount) + parseInt(selAddSvcCount) + parseInt(selLockSvcCount))
+        console.log(total)
+        setTotalCost(total)
+        console.log('totalCost', totalCost)
+        // basic with all should be 110 total
+        // all inclusive  with all should be 130 total
+        setShowQuoteModal(true)
+       
     };
 
     const handleServiceChange = (value) => {
@@ -137,7 +182,12 @@ export default function QuoteForm() {
                 {/* Submit button */}
                 <div className='form-group'>
                     <div className='col-xs-offset-2 col-xs-10'>
-                        <button type="submit" className='btn btn-info btn-lg'>Submit</button>
+                        {
+                            selectedService !== null ?
+                                <button type="submit" className='btn btn-info btn-lg'>Submit</button> :
+                                <button type="submit" className='btn btn-info btn-lg' disabled={true}>Submit</button>
+                        }
+
                     </div>
                 </div>
             </form>

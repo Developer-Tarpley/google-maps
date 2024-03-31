@@ -1,0 +1,23 @@
+.quote-container{
+    position: fixed;
+    z-index: 1;
+    padding-top: 150px;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+    background-color: #0a98c7;
+
+    /* animation-name: animationModal;
+    animation-duration: 0.5s; */
+}
+
+.quote-display{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #ffffff;
+    width: 80%;
+}
